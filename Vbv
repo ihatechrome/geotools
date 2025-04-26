@@ -1,0 +1,22 @@
+class RedirectionService extends CallRedirectionService {
+    @Override
+    public void onPlaceCall(
+            @NonNull Uri handle,
+            @NonNull PhoneAccountHandle initialPhoneAccount,
+            boolean allowInteractiveResponse
+    ) {
+        // Determine if the call should proceed, be redirected, or cancelled.
+        // Your app should implement this logic to determine the redirection.
+        boolean callShouldProceed = true;
+        boolean callShouldRedirect = false;
+        if (callShouldProceed) {
+            placeCallUnmodified();
+        } else if (callShouldRedirect) {
+            // Update the URI to point to a different phone number or modify the
+            // PhoneAccountHandle and redirect.
+            redirectCall(handle, initialPhoneAccount, true);
+        } else {
+            cancelCall();
+        }
+    }
+}
